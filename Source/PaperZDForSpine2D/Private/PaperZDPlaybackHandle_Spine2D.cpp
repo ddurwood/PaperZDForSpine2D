@@ -47,7 +47,7 @@ void UPaperZDPlaybackHandle_Spine2D::UpdateRenderPlayback(UPrimitiveComponent* R
 			//Update the skeleton
 			spine::Skeleton* Skeleton = AnimationComponent->GetSkeleton();
 			AnimationComponent->GetAnimationState()->apply(*Skeleton);
-			Skeleton->updateWorldTransform();
+			Skeleton->updateWorldTransform( spine::Physics_Update );
 
 			//Finally update the renderer
 			SpineRender->UpdateRenderer(AnimationComponent);
