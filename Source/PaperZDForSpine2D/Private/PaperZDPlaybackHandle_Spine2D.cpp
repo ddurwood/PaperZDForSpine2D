@@ -2,6 +2,7 @@
 
 #include "PaperZDPlaybackHandle_Spine2D.h"
 #include "AnimSequences/Players/PaperZDAnimationPlaybackData.h"
+#include <spine/SkeletonData.h>
 
 void UPaperZDPlaybackHandle_Spine2D::UpdateRenderPlayback(UPrimitiveComponent* RenderComponent, const FPaperZDAnimationPlaybackData& PlaybackData, bool bIsPreviewPlayback /* = false */)
 {
@@ -75,12 +76,42 @@ void UPaperZDPlaybackHandle_Spine2D::ConfigureRenderComponent(UPrimitiveComponen
 			AnimationComponent->Atlas = Atlas;
 			AnimationComponent->SkeletonData = SkeletonDataAsset;
 			AnimationComponent->SetAutoPlay(false);
+
+         // Update the skin
+         spine::Skeleton *Skeleton = AnimationComponent->GetSkeleton();
+         if ( bIsPreviewPlayback && !Skeleton->getSkin() )
+         {
+            spine::Skin *defaultSkin = nullptr;
+            spine::SkeletonData *Data = Skeleton->getData();
+            if ( !PreviewSkin.IsEmpty() )
+            {
+               spine::String str( TCHAR_TO_UTF8( *PreviewSkin ) );
+               defaultSkin = Data->findSkin( str );
+            }
+            if ( !defaultSkin )
+            {
+               defaultSkin = Data->getDefaultSkin();
+            }
+            if ( !defaultSkin )
+            {
+               spine::Vector< spine::Skin * > &Skins = Data->getSkins();
+               if ( Skins.size() )
+               {
+                  defaultSkin = Skins[ 0 ];
+               }
+            }
+            if ( defaultSkin )
+            {
+               Skeleton->setSkin( defaultSkin );
+            }
+         }
 		}
 	}
 }
 
-void UPaperZDPlaybackHandle_Spine2D::InitRenderData(USpineAtlasAsset* InAtlas, USpineSkeletonDataAsset* InSkeletonDataAsset)
+void UPaperZDPlaybackHandle_Spine2D::InitRenderData(USpineAtlasAsset* InAtlas, USpineSkeletonDataAsset* InSkeletonDataAsset, FString InPreviewSkin )
 {
 	Atlas = InAtlas;
 	SkeletonDataAsset = InSkeletonDataAsset;
+   PreviewSkin = InPreviewSkin;
 }
