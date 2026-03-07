@@ -10,7 +10,7 @@ UPaperZDAnimationSource_Spine2D::UPaperZDAnimationSource_Spine2D()
 {
 	SupportedAnimSequenceClass = UPaperZDAnimSequence_Spine2D::StaticClass();
 	bSupportsBlending = false;
-	bSupportsAnimationLayers = true;
+	bSupportsBlendLayers = true;
 	bSkeletonDataCacheValid = false;
 	CachedSkeletonData = nullptr;
 }

@@ -32,13 +32,10 @@ class PAPERZDFORSPINE2D_API UPaperZDPlaybackHandle_Spine2D : public UPaperZDPlay
 	
 public:
 	//~ Begin UPaperZDPlaybackHandle Interface
-	virtual void UpdateRenderPlayback(UPrimitiveComponent* RenderComponent, const FPaperZDAnimationPlaybackData& PlaybackData, bool bIsPreviewPlayback = false) override;
+	virtual void UpdateRenderPlayback(UPrimitiveComponent* RenderComponent, const FPaperZDAnimationPlaybackData& PlaybackData, bool bIsPreviewPlayback = false, int32 LayerIndex = 0, UPaperZDAnimationSkin* SkinOverride = nullptr) override;
 	virtual void ConfigureRenderComponent(UPrimitiveComponent* RenderComponent, bool bIsPreviewPlayback = false) override;
 	//~ End UPaperZDPlaybackHandle Interface
 
 	/* Setup the required data for spine 2d rendering. */
-	void InitRenderData(USpineAtlasAsset* InAtlas, USpineSkeletonDataAsset* InSkeletonDataAsset);
-
-private:
-	
+	void InitRenderData(USpineAtlasAsset* InAtlas, USpineSkeletonDataAsset* InSkeletonDataAsset);	
 };

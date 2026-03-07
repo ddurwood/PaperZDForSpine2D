@@ -56,6 +56,12 @@ bool UPaperZDAnimSequence_Spine2D::IsDataSourceEntrySet(int32 EntryIndex) const
 	return AnimDataSource.IsValidIndex(EntryIndex) ? !AnimDataSource[EntryIndex].IsEmpty() : false;
 }
 
+FName UPaperZDAnimSequence_Spine2D::GetDataSourcePropertyName() const
+{
+	static const FName AnimDataSourceName = TEXT("AnimDataSource");
+	return AnimDataSourceName;
+}
+
 TArray<FString> UPaperZDAnimSequence_Spine2D::GetAvailableAnimationNames() const
 {
 	TArray<FString> AnimationNames;
