@@ -33,7 +33,6 @@ public:
 	virtual float GetTotalDuration() const override;
 	virtual float GetFramesPerSecond() const override;
 	virtual bool IsDataSourceEntrySet(int32 EntryIndex) const override;
-	virtual FName GetDataSourcePropertyName() const override;
 	//~ End UPaperZDAnimSequence Interface
 
 private:
