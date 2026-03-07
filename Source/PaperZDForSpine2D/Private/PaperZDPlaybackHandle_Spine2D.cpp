@@ -9,7 +9,7 @@
 #include "spine/Physics.h"
 #endif
 
-void UPaperZDPlaybackHandle_Spine2D::UpdateRenderPlayback(UPrimitiveComponent* RenderComponent, const FPaperZDAnimationPlaybackData& PlaybackData, bool bIsPreviewPlayback /* = false */, int32 LayerIndex /* = 0 */, UPaperZDAnimationSkin* SkinOverride /* = nullptr */)
+void UPaperZDPlaybackHandle_Spine2D::UpdateRenderPlayback(UPrimitiveComponent* RenderComponent, const FPaperZDAnimationPlaybackData& PlaybackData, bool bIsPreviewPlayback /* = false */)
 {
 	USpineSkeletonRendererComponent* SpineRender = Cast<USpineSkeletonRendererComponent>(RenderComponent);
 	if (SpineRender && AnimationComponent)
@@ -52,10 +52,13 @@ void UPaperZDPlaybackHandle_Spine2D::UpdateRenderPlayback(UPrimitiveComponent* R
 
 			//Update the skeleton
 			spine::Skeleton* Skeleton = AnimationComponent->GetSkeleton();
+			Skeleton->update(DeltaTime);
 			AnimationComponent->GetAnimationState()->apply(*Skeleton);
 
 #if SPINE_MAJOR_VERSION >= 4 && SPINE_MINOR_VERSION >= 2
+			AnimationComponent->BeforeUpdateWorldTransform.Broadcast(AnimationComponent);
 			Skeleton->updateWorldTransform(spine::Physics::Physics_Update);
+			AnimationComponent->AfterUpdateWorldTransform.Broadcast(AnimationComponent);
 #elif 
 			Skeleton->updateWorldTransform();
 #endif
