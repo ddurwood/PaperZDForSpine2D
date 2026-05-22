@@ -19,7 +19,7 @@ void UPaperZDPlaybackHandle_Spine2D::UpdateRenderPlayback(UPrimitiveComponent* R
 		{
 			//We will work directly with the tracks, so we can manage the playback times directly
 			const FString& AnimationName = WeightedAnimation.AnimSequencePtr->GetAnimationData<FString>(PlaybackData.DirectionalAngle, bIsPreviewPlayback);
-			UTrackEntry* TrackEntry = AnimationComponent->GetCurrent(WeightedAnimation.Layer);
+			UTrackEntry* TrackEntry = AnimationComponent->GetTrack(WeightedAnimation.Layer);
 			if (!TrackEntry || TrackEntry->getAnimationName() != AnimationName)
 			{
 				TrackEntry = AnimationComponent->SetAnimation(WeightedAnimation.Layer, AnimationName, false);
@@ -45,7 +45,7 @@ void UPaperZDPlaybackHandle_Spine2D::UpdateRenderPlayback(UPrimitiveComponent* R
 			//Because the animations don't necessarily update at the same speed as the tick time (due to playback speed), we need to setup the animations
 			for (const FPaperZDWeightedAnimation& WeightedAnimation : PlaybackData.WeightedAnimations)
 			{
-				UTrackEntry* TrackEntry = AnimationComponent->GetCurrent(WeightedAnimation.Layer);
+				UTrackEntry* TrackEntry = AnimationComponent->GetTrack(WeightedAnimation.Layer);
 				TrackEntry->SetTrackTime(WeightedAnimation.PlaybackTime);
 				TrackEntry->SetAlpha(WeightedAnimation.LayerWeight);
 			}
