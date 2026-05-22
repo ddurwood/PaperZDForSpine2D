@@ -1,10 +1,10 @@
 {
 	"FileVersion": 3,
-	"Version": 3,
-	"VersionName": "2.0",
+	"Version": 4,
+	"VersionName": "2.1",
 	"FriendlyName": "PaperZDForSpine2D",
 	"Description": "PaperZD Support for Spine2D",
-	"Category": "2D",
+	"Category": "Other",
 	"CreatedBy": "CriticalFailure Studio",
 	"CreatedByURL": "http://www.criticalfailure-studio.com",
 	"DocsURL": "",
@@ -29,6 +29,5 @@
 			"Name": "SpinePlugin",
 			"Enabled": true
 		}
-	],
-	"IsExperimentalVersion": false
+	]
 }

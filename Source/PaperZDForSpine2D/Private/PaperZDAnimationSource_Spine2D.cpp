@@ -10,7 +10,7 @@ UPaperZDAnimationSource_Spine2D::UPaperZDAnimationSource_Spine2D()
 {
 	SupportedAnimSequenceClass = UPaperZDAnimSequence_Spine2D::StaticClass();
 	bSupportsBlending = false;
-	bSupportsAnimationLayers = true;
+	bSupportsBlendLayers = true;
 	bSkeletonDataCacheValid = false;
 	CachedSkeletonData = nullptr;
 }
@@ -22,8 +22,7 @@ void UPaperZDAnimationSource_Spine2D::PostEditChangeProperty(struct FPropertyCha
 
 	//If any of these values change, the skeleton data is no longer valid
 	if (PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(UPaperZDAnimationSource_Spine2D, Atlas)
-		|| PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(UPaperZDAnimationSource_Spine2D, SkeletonDataAsset)
-      || PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED( UPaperZDAnimationSource_Spine2D, PreviewSkin ) )
+		|| PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(UPaperZDAnimationSource_Spine2D, SkeletonDataAsset))
 	{
 		InvalidateCache();
 	}
@@ -45,7 +44,7 @@ void UPaperZDAnimationSource_Spine2D::InitPlaybackHandle(UPaperZDPlaybackHandle*
 	UPaperZDPlaybackHandle_Spine2D* SpineHandle = Cast<UPaperZDPlaybackHandle_Spine2D>(Handle);
 	if (SpineHandle)
 	{
-		SpineHandle->InitRenderData( Atlas, SkeletonDataAsset, PreviewSkin );
+		SpineHandle->InitRenderData(Atlas, SkeletonDataAsset);
 	}
 }
 

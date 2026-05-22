@@ -25,10 +25,6 @@ class PAPERZDFORSPINE2D_API UPaperZDAnimationSource_Spine2D : public UPaperZDAni
 	UPROPERTY(EditAnywhere, Category = "Animation")
 	USpineSkeletonDataAsset* SkeletonDataAsset;
 
-   /* The preview skin to use when rendering */
-   UPROPERTY( EditAnywhere, Category = "Animation" )
-   FString PreviewSkin;
-
 	/* If true, the skeleton data cache is valid. */
 	UPROPERTY(Transient)
 	mutable bool bSkeletonDataCacheValid;

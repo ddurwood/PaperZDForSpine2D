@@ -1,7 +1,5 @@
 # PaperZDForSpine2D
 
-(Updated for Unreal Engine 5.3.2)
-
 This plugin gives support for running Spine2D sequences on PaperZD, must have both plugins installed for this to work.
 
 This plugin contains:
