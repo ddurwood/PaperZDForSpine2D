@@ -22,7 +22,8 @@ void UPaperZDAnimationSource_Spine2D::PostEditChangeProperty(struct FPropertyCha
 
 	//If any of these values change, the skeleton data is no longer valid
 	if (PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(UPaperZDAnimationSource_Spine2D, Atlas)
-		|| PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(UPaperZDAnimationSource_Spine2D, SkeletonDataAsset))
+		|| PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED(UPaperZDAnimationSource_Spine2D, SkeletonDataAsset)
+      || PropertyChangedEvent.GetPropertyName() == GET_MEMBER_NAME_CHECKED( UPaperZDAnimationSource_Spine2D, PreviewSkin ) )
 	{
 		InvalidateCache();
 	}
@@ -44,7 +45,7 @@ void UPaperZDAnimationSource_Spine2D::InitPlaybackHandle(UPaperZDPlaybackHandle*
 	UPaperZDPlaybackHandle_Spine2D* SpineHandle = Cast<UPaperZDPlaybackHandle_Spine2D>(Handle);
 	if (SpineHandle)
 	{
-		SpineHandle->InitRenderData(Atlas, SkeletonDataAsset);
+      SpineHandle->InitRenderData( Atlas, SkeletonDataAsset, PreviewSkin );
 	}
 }
 
